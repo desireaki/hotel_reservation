@@ -7,12 +7,12 @@ import model.Reservation;
 import java.util.*;
 
 public class ReservationService {
-    private static List<IRoom> listOfAllRooms= new ArrayList<IRoom>();
-    private static  List<Reservation> reservationList= new ArrayList<Reservation>();
+    private static List<IRoom> listOfAllRooms= new ArrayList<>();
+    private static  List<Reservation> reservationList= new ArrayList<>();
 
     /**
      * This method adds a new room to the room list
-     * @param room
+     * @param room The new created room
      */
     public static void addRoom(IRoom room){
         listOfAllRooms.add(room);
@@ -20,7 +20,7 @@ public class ReservationService {
 
     /**
      * This method returns the room info from the room number
-     * @param roomId
+     * @param roomId The ID for the room
      * @return room profile
      */
     public static IRoom getARoom(String roomId){
@@ -34,10 +34,10 @@ public class ReservationService {
 
     /**
      * This method create a new room reservation
-     * @param customer
-     * @param room
-     * @param checkInDate
-     * @param checkOutDate
+     * @param customer Customer info
+     * @param room The room desired
+     * @param checkInDate Check in date
+     * @param checkOutDate Check out date
      * @return a new reservation
      */
     public static Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate){
@@ -52,8 +52,8 @@ public class ReservationService {
 
     /**
      * This method allows the user to get a list of available rooms
-     * @param checkInDate
-     * @param checkOutDate
+     * @param checkInDate Check in Date
+     * @param checkOutDate Check out date
      * @return list of available rooms.
      */
     public static Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate){
@@ -77,14 +77,15 @@ public class ReservationService {
 
     /**
      * This method allows the user to get all the customer's reservation
-     * @param customer
+     * @param customer Customer's info
      * @return list of all reservations
      */
     public static Collection<Reservation>getCustomerReservation(Customer customer){
-        Collection<Reservation> customersReservation= null; //Store the customer's reservations
+        List<Reservation> customersReservation= new ArrayList<>();
+        //Store the customer's reservations
         //Loop through all the reservation list and catches every reservation with the provided customer
         for(Reservation k: reservationList) {
-            if(k.getCustomer().equals(customer)){
+            if(k.getCustomer().equals(customer) ){
                 customersReservation.add(k);
             }
         }
@@ -113,9 +114,9 @@ public class ReservationService {
 
     /**
      * This method validates all the  user input when creating a new reservation
-     * @param room
-     * @param checkInDate
-     * @param checkOutDate
+     * @param room Room info
+     * @param checkInDate Check in date
+     * @param checkOutDate Check out date
      * @return true or false
      */
     private static boolean validateReservation(IRoom room, Date checkInDate, Date checkOutDate){
